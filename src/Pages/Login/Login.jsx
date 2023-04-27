@@ -9,24 +9,36 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { theme } from "./../../data/dummy";
+import useClasses from "../../utils/useClasses";
+
 function Login() {
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
+  const styles = (theme) => ({
+    thaiTextFieldInputProps: {
+      paddingTop: "1rem",
+      paddingBottom: "1rem",
+    },
+  });
+  const classes = useClasses(styles);
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      width="100wh"
-      height="100vh"
-    >
-      <Container maxWidth="xl">
+    <Container maxWidth="xl">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        width="100wh"
+        height="100vh"
+      >
         <Box
           display="flex"
           flexDirection="column"
           gap={2}
+          px={biggerThanMd ? 3 : 0}
           height="60vh"
-          width={biggerThanMd ? "400px" : "100%"}
+          width={biggerThanMd ? "350px" : "100%"}
           border={biggerThanMd ? 1 : 0}
+          borderRadius={2}
+          borderColor={theme.palette.grey[400]}
         >
           <Box textAlign="center" py={2}>
             <Typography variant="h4" color={theme.palette.primary.main}>
@@ -47,10 +59,18 @@ function Login() {
           </Box>
           <Box>
             <TextField
-              sx={{ width: "100%", direction: "rtl" }}
+              sx={{
+                width: "100%",
+                direction: "rtl",
+              }}
+              InputProps={{
+                classes: {
+                  input: classes.thaiTextFieldInputProps,
+                },
+              }}
               id="mobile"
               label=""
-              variant="filled"
+              variant={biggerThanMd ? "outlined" : "filled"}
             />
           </Box>
           <Box>
@@ -66,8 +86,8 @@ function Login() {
             </Typography>
           </Box>
         </Box>
-      </Container>
-    </Box>
+      </Box>
+    </Container>
   );
 }
 

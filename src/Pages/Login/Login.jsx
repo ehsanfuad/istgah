@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import { theme } from "./../../data/dummy";
 import useClasses from "../../utils/useClasses";
+import { loginSchema } from "../../schemas/index";
+import { Field, Form, Formik, useFormik } from "formik";
 
 function Login() {
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
@@ -20,6 +22,25 @@ function Login() {
     },
   });
   const classes = useClasses(styles);
+
+  const onSubmit = (values, errors) => {
+    console.log(values.mobile);
+  };
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      mobile: "asd;lm",
+    },
+    validationSchema: loginSchema,
+    onSubmit,
+  });
   return (
     <Container maxWidth="xl">
       <Box
@@ -51,37 +72,65 @@ function Login() {
             </Typography>
           </Box>
           <Box>
-            <Typography variant="caption" color={theme.palette.grey[800]}>
+            <Typography
+              fontSize="0.8rem"
+              variant="subtitle1"
+              color={theme.palette.grey[800]}
+            >
               سلام!
               <br />
               لطفا شماره موبایل خود را وارد کنید
             </Typography>
           </Box>
+          <Formik
+            initialValues={{ mobile: "" }}
+            validationSchema={loginSchema}
+            onSubmit={onSubmit}
+          >
+            {({ errors, touched }) => (
+              <Form autoComplete="off">
+                <Box mb={1}>
+                  <Field
+                    name="mobile"
+                    validate={(value) => {
+                      if (!value) {
+                        return "لطفا این قسمت را خالی نگذارید";
+                      } else if (!/^(\+98|0)?9\d{9}$/.test(value)) {
+                        return "شماره موبایل نادرست است";
+                      }
+                    }}
+                  >
+                    {({ field }) => (
+                      <TextField
+                        {...field}
+                        id="mobile"
+                        fullWidth
+                        label=""
+                        variant={biggerThanMd ? "outlined" : "filled"}
+                        error={touched.mobile && Boolean(errors.mobile)}
+                        helperText={touched.mobile && errors.mobile}
+                        autoFocus
+                      />
+                    )}
+                  </Field>
+                </Box>
+                <Box>
+                  <Button
+                    sx={{ py: 1.2 }}
+                    fullWidth
+                    variant="contained"
+                    type="submit"
+                  >
+                    ورود
+                  </Button>
+                </Box>
+              </Form>
+            )}
+          </Formik>
           <Box>
-            <TextField
-              sx={{
-                width: "100%",
-                direction: "rtl",
-              }}
-              InputProps={{
-                classes: {
-                  input: classes.thaiTextFieldInputProps,
-                },
-              }}
-              id="mobile"
-              label=""
-              variant={biggerThanMd ? "outlined" : "filled"}
-            />
-          </Box>
-          <Box>
-            <Button sx={{ py: 1.2 }} fullWidth variant="contained">
-              ورود
-            </Button>
-          </Box>
-          <Box>
-            <Typography fontSize="0.7rem">
+            <Typography fontSize="0.7rem" color={theme.palette.grey[700]}>
               ورود شما به معنای پذیرش شرایط
-              <Link underline="none">کافه ایستگاه</Link> و
+              <Link underline="none">کافه ایستگاه </Link>و
               <Link underline="none">قوانین حریم‌ خصوصی</Link> است
             </Typography>
           </Box>

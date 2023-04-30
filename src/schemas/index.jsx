@@ -7,5 +7,11 @@ export const loginSchema = yup.object().shape({
     .string()
     .required("لطفا این قسمت را خالی نگذارید")
     .matches(mobileRules, { message: "شماره موبایل نادرست است" }),
+});
 
+export const verifySchema = yup.object().shape({
+  verifyNumber: yup
+    .string()
+    .required("")
+    .matches(/^[0-9]+$/, "مقدار وارد شده باید فقط شامل عدد باشد."),
 });

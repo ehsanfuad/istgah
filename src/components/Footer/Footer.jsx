@@ -43,7 +43,7 @@ function Footer() {
       <hr style={{ marginBottom: "2rem", border: "1px solid #f2f2f2" }} />
       <Container maxWidth="xl">
         <Box mb={5}>
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             <Grid item xs={12} lg={3}>
               <Box
                 display="flex"

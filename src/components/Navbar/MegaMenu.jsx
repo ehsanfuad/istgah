@@ -20,7 +20,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { theme } from "./../../data/dummy";
 import useClasses from "./../../utils/useClasses";
 
-const styles = theme => ({
+const styles = (theme) => ({
   popover: {
     pointerEvents: "none",
   },

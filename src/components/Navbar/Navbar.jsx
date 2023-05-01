@@ -23,6 +23,7 @@ import { useState } from "react";
 import { navLinks, createCategoryList, theme } from "./../../data/dummy";
 import { Link as RouterLink } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
+import Cart from "../Cart/Cart";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -96,9 +97,20 @@ const StyledButtonNav = styled(Button)(({ theme }) => ({
 function Navbar() {
   const [subCats, setSubCats] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [cartAnchorEl, setCartAnchorEl] = useState(null);
+  const [eventCart, setEventCart] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [event, setEvent] = useState(null);
   const categories = createCategoryList(navLinks);
+
+  const handleCartClick = (e) => {
+    setCartAnchorEl(e.currentTarget);
+    setEventCart(e.currentTarget);
+    // setCartAnchorEl(eventCart);
+  };
+  const handleCartClose = () => {
+    setCartAnchorEl(null);
+  };
 
   const handleClick = (event, children) => {
     setAnchorEl(event.currentTarget);
@@ -176,7 +188,12 @@ function Navbar() {
                     <VscTriangleDown style={{ width: "12px" }} />
                   </IconButton>
                   <Divider orientation="vertical" />
-                  <IconButton size="inherit" color="inherit">
+                  <IconButton
+                    size="inherit"
+                    color="inherit"
+                    onMouseOver={(e) => handleCartClick(e)}
+                    onMouseLeave={handleCartClose}
+                  >
                     <FiShoppingCart />
                   </IconButton>
                 </Box>
@@ -199,7 +216,7 @@ function Navbar() {
                           color="inherit"
                           variant="outlined"
                           startIcon={<GiCoffeeBeans />}
-                          onMouseOver={e => handleClick(e, category.children)}
+                          onMouseOver={(e) => handleClick(e, category.children)}
                           onMouseLeave={handleClose}
                           sx={
                             index === 0
@@ -224,7 +241,13 @@ function Navbar() {
           event={event}
         />
       </Box>
-
+      <Box>
+        <Cart
+          setCartAnchorEl={setCartAnchorEl}
+          cartAnchorEl={cartAnchorEl}
+          eventCart={eventCart}
+        />
+      </Box>
       {/* <Box sx={{ width: "100%", height: "300px" }}>
         <Slider />
       </Box> */}

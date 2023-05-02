@@ -1,6 +1,7 @@
 import {
   alpha,
   AppBar,
+  Badge,
   Box,
   Button,
   Container,
@@ -19,9 +20,10 @@ import { FiShoppingCart, FiUser, FiPhone } from "react-icons/fi";
 import { VscTriangleDown } from "react-icons/vsc";
 import { GiHamburgerMenu, GiGlassShot } from "react-icons/gi";
 import { GiCoffeeBeans, GiTeapotLeaves } from "react-icons/gi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { navLinks, createCategoryList, theme } from "./../../data/dummy";
 import { Link as RouterLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
 import Cart from "../Cart/Cart";
 
@@ -101,12 +103,21 @@ function Navbar() {
   const [eventCart, setEventCart] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [event, setEvent] = useState(null);
+  const [isShowCart, setIsShowCart] = useState(true);
   const categories = createCategoryList(navLinks);
+
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/cart") {
+      setIsShowCart(false);
+    } else {
+      setIsShowCart(true);
+    }
+  }, [location.pathname]);
 
   const handleCartClick = (e) => {
     setCartAnchorEl(e.currentTarget);
     setEventCart(e.currentTarget);
-    // setCartAnchorEl(eventCart);
   };
   const handleCartClose = () => {
     setCartAnchorEl(null);
@@ -188,14 +199,30 @@ function Navbar() {
                     <VscTriangleDown style={{ width: "12px" }} />
                   </IconButton>
                   <Divider orientation="vertical" />
-                  <IconButton
-                    size="inherit"
+                  <Link
+                    to="/cart"
+                    component={RouterLink}
                     color="inherit"
-                    onMouseOver={(e) => handleCartClick(e)}
-                    onMouseLeave={handleCartClose}
+                    underline="none"
                   >
-                    <FiShoppingCart />
-                  </IconButton>
+                    <IconButton
+                      size="inherit"
+                      color="inherit"
+                      onMouseOver={(e) => handleCartClick(e)}
+                      onMouseLeave={handleCartClose}
+                    >
+                      <Badge
+                        badgeContent={1}
+                        color="secondary"
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "right",
+                        }}
+                      >
+                        <FiShoppingCart />
+                      </Badge>
+                    </IconButton>
+                  </Link>
                 </Box>
               </Box>
               <StyledBox>
@@ -246,6 +273,7 @@ function Navbar() {
           setCartAnchorEl={setCartAnchorEl}
           cartAnchorEl={cartAnchorEl}
           eventCart={eventCart}
+          isShowCart={isShowCart}
         />
       </Box>
       {/* <Box sx={{ width: "100%", height: "300px" }}>

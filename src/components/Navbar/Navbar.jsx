@@ -26,6 +26,14 @@ import { Link as RouterLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
 import Cart from "../Cart/Cart";
+import useClasses from "../../utils/useClasses";
+
+const styles = (theme) => ({
+  // appBar: {
+  //   position: "sticky",
+  //   zIndex: theme.zIndex.drawer + 1,
+  // },
+});
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -105,7 +113,7 @@ function Navbar() {
   const [event, setEvent] = useState(null);
   const [isShowCart, setIsShowCart] = useState(true);
   const categories = createCategoryList(navLinks);
-
+  const classes = useClasses(styles);
   const location = useLocation();
   useEffect(() => {
     if (location.pathname === "/cart") {
@@ -132,11 +140,18 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  //className={classes.appBar}
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="sticky" color="primary">
+      <Box
+        position="sticky"
+        top={0}
+        height="88px"
+        display="flex"
+        zIndex={1}
+        // sx={{ flexGrow: 1 }}
+      >
+        <AppBar color="primary">
           <Container maxWidth="xl">
             <StyledToolbar disableGutters={true}>
               <Box

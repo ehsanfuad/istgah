@@ -3,7 +3,7 @@ import React from "react";
 import { theme } from "../../data/dummy";
 import CounterCart from "./CounterCart";
 
-function ProductCard({ product }) {
+function ProductCard({ product, border }) {
   return (
     <Box
       display="flex"
@@ -11,11 +11,11 @@ function ProductCard({ product }) {
       gap={2}
       py={2}
       my={0.5}
-      border={1}
+      border={border}
       borderRadius={2}
       borderColor={theme.palette.grey[300]}
     >
-      <Box flex={1} display="flex" flexDirection="column">
+      <Box maxWidth="116px" flex={1} display="flex" flexDirection="column">
         <img src={product.imgUrl} width="100%" alt={product.title} />
         <CounterCart />
       </Box>

@@ -4,7 +4,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
-import Cart from "./components/Cart/Cart";
+import Cart from "./Pages/Cart/Cart";
 
 const Layout = () => {
   return (
@@ -25,7 +25,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      { path: "/cart", element: <Cart /> },
       // {
       //   path: "/products/:id",
       //   element: <Products />,
@@ -37,6 +36,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/login", element: <Login /> },
+  { path: "/cart", element: <Cart /> },
 ]);
 function App() {
   return (

@@ -13,6 +13,7 @@ import {
   styled,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { SiCoffeescript } from "react-icons/si";
 import { MdSearch, MdCoffeeMaker } from "react-icons/md";
@@ -27,13 +28,6 @@ import { useLocation } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
 import Cart from "../Cart/Cart";
 import useClasses from "../../utils/useClasses";
-
-const styles = (theme) => ({
-  // appBar: {
-  //   position: "sticky",
-  //   zIndex: theme.zIndex.drawer + 1,
-  // },
-});
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -88,7 +82,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const StyledBox = styled(Box)(({ theme }) => ({
   display: "none",
-  marginTop: "15px",
+  marginTop: "10px",
   [theme.breakpoints.up("md")]: {
     display: "flex",
   },
@@ -100,6 +94,7 @@ const StyledButtonNav = styled(Button)(({ theme }) => ({
   alignItems: "center",
   fontSize: "18px",
   padding: 0,
+
   // color: theme.palette.secondary.main,
   "& .MuiButton-startIcon": { marginRight: "0px" },
 }));
@@ -113,8 +108,8 @@ function Navbar() {
   const [event, setEvent] = useState(null);
   const [isShowCart, setIsShowCart] = useState(true);
   const categories = createCategoryList(navLinks);
-  const classes = useClasses(styles);
   const location = useLocation();
+  const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   useEffect(() => {
     if (location.pathname === "/cart") {
       setIsShowCart(false);
@@ -140,18 +135,18 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  //className={classes.appBar}
+
   return (
     <>
       <Box
-        position="sticky"
+        position={biggerThanMd ? "sticky" : "static"}
         top={0}
         height="88px"
         display="flex"
         zIndex={1}
-        // sx={{ flexGrow: 1 }}
+        sx={{ flexGrow: 1 }}
       >
-        <AppBar color="primary">
+        <AppBar position={biggerThanMd ? "sticky" : "static"} color="primary">
           <Container maxWidth="xl">
             <StyledToolbar disableGutters={true}>
               <Box

@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Button, useMediaQuery, Typography } from "@mui/material";
 import { theme } from "../../data/dummy";
-
 function ProductInfoCardMobile({ product }) {
   const mobileVersion = useMediaQuery(theme.breakpoints.down("md"));
   if (mobileVersion) {

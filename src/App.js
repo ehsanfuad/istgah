@@ -12,7 +12,7 @@ import Cart from "./Pages/Cart/Cart";
 // import Test from "./components/Navbar/Test";
 import Profile from "./Pages/Profile/Profile";
 import Orders from "./Pages/Profile/Orders";
-import Menu from "./Pages/Profile/Menu";
+import PageLayout from "./Pages/Profile/PageLayout";
 // import PersonalInfo from "./Pages/Profile/PersonalInfo";
 
 const Layout = () => {
@@ -28,8 +28,7 @@ const ProfileLayout = () => {
   return (
     <>
       <Navbar />
-      {/* <Outlet /> */}
-      <Menu />
+      <PageLayout />
     </>
   );
 };
@@ -68,6 +67,7 @@ const router = createBrowserRouter([
         path: "orders",
         element: <Orders />,
       },
+
       // {
       //   path: "personal-info",
       //   element: <PersonalInfo />,

@@ -12,6 +12,8 @@ import Cart from "./Pages/Cart/Cart";
 // import Test from "./components/Navbar/Test";
 import Profile from "./Pages/Profile/Profile";
 import Orders from "./Pages/Profile/Orders";
+import Addresses from "./Pages/Profile/Addresses";
+import WishList from "./Pages/Profile/WishList";
 import PageLayout from "./Pages/Profile/PageLayout";
 // import PersonalInfo from "./Pages/Profile/PersonalInfo";
 
@@ -54,7 +56,6 @@ const router = createBrowserRouter([
   },
   { path: "/login", element: <Login /> },
   { path: "/cart", element: <Cart /> },
-  // { path: "/test", element: <Test /> },
   {
     path: "profile",
     element: <ProfileLayout />,
@@ -67,11 +68,14 @@ const router = createBrowserRouter([
         path: "orders",
         element: <Orders />,
       },
-
-      // {
-      //   path: "personal-info",
-      //   element: <PersonalInfo />,
-      // },
+      {
+        path: "addresses",
+        element: <Addresses />,
+      },
+      {
+        path: "wish-list",
+        element: <WishList />,
+      },
     ],
   },
 ]);

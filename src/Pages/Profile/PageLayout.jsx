@@ -1,11 +1,20 @@
 import { Box, Container, useMediaQuery } from "@mui/material";
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import { theme } from "../../data/dummy";
 import Menu from "./Menu";
 
 function PageLayout() {
+  const [showMobileMenu, setShowMobileMenu] = useState(true);
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname != "/profile" && !biggerThanMd) {
+      setShowMobileMenu(false);
+    } else {
+      setShowMobileMenu(true);
+    }
+  }, [location.pathname, biggerThanMd]);
 
   return (
     <Container maxWidth="xl">
@@ -20,6 +29,7 @@ function PageLayout() {
           border={biggerThanMd ? 1 : 0}
           borderRadius={2}
           borderColor={theme.palette.grey[300]}
+          display={showMobileMenu ? "block" : "none"}
         >
           <Menu />
         </Box>

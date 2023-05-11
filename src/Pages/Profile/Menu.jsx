@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsSignpost2 } from "react-icons/bs";
@@ -6,7 +6,7 @@ import { FiUser } from "react-icons/fi";
 import { IoLogOutOutline } from "react-icons/io5";
 import { BiChevronLeft } from "react-icons/bi";
 import { Box, Typography, Link, Divider, useMediaQuery } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { theme } from "../../data/dummy";
 
 const items = [
@@ -15,19 +15,41 @@ const items = [
     title: "سفارش ها",
     path: "/profile/orders",
   },
-  { icon: <FiUser size={22} />, title: "اطلاعات حساب کاربری", path: "" },
-  { icon: <AiOutlineHeart size={22} />, title: "لیست علاقه مندی", path: "" },
-  { icon: <BsSignpost2 size={22} />, title: "آدرس ها", path: "" },
-  { icon: <IoLogOutOutline size={22} />, title: "خروج", path: "" },
+  {
+    icon: <FiUser size={22} />,
+    title: "اطلاعات حساب کاربری",
+    path: "/profile",
+  },
+  {
+    icon: <AiOutlineHeart size={22} />,
+    title: "لیست علاقه مندی",
+    path: "/profile/wish-list",
+  },
+  {
+    icon: <BsSignpost2 size={22} />,
+    title: "آدرس ها",
+    path: "/profile/addresses",
+  },
+  {
+    icon: <IoLogOutOutline size={22} />,
+    title: "خروج",
+    path: "/profile/logout",
+  },
 ];
 
 function Menu() {
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(items[0].path);
+  const location = useLocation();
+  
+  useEffect(() => {
+    setActive(location.pathname);
+  }, [location.pathname]);
+
   return (
     <Box display="flex" flexDirection="column">
       {items.map((item, index) => (
-        <>
+        <Box key={index}>
           <Divider
             sx={{
               marginX: 0,
@@ -48,17 +70,17 @@ function Menu() {
               py={1}
               px={biggerThanMd ? 2 : 0}
               marginY={1}
-              borderRight={biggerThanMd && index === active ? 5 : 0}
+              borderRight={biggerThanMd && item.path === active ? 5 : 0}
               borderColor={theme.palette.primary.main}
               onClick={() => {
-                setActive(index);
+                setActive(item.path);
               }}
             >
               <Box display="flex" gap={2} alignItems="center">
                 <Box>{item.icon}</Box>
                 <Typography
                   fontSize="0.8rem"
-                  variant={active === index ? "subtitle1" : "subtitle2"}
+                  variant={active === item.path ? "subtitle1" : "subtitle2"}
                   color={theme.palette.grey[800]}
                 >
                   {item.title}
@@ -72,7 +94,7 @@ function Menu() {
               </Box>
             </Box>
           </Link>
-        </>
+        </Box>
       ))}
     </Box>
   );

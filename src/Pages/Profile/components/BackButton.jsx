@@ -1,7 +1,7 @@
 import { Typography, Box, useMediaQuery } from "@mui/material";
 import React from "react";
 import { BsArrowRight } from "react-icons/bs";
-import { theme } from "../../data/dummy";
+import { theme } from "../../../data/dummy";
 import { useNavigate } from "react-router-dom";
 
 function BackButton({ title }) {

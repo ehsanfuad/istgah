@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { theme } from "../../../data/dummy";
 import TabTitle from "./TabTitle";
+import OrderCards from "./OrderCards";
 
 const initialTabs = { first: false, second: false, third: false };
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
     <div role="tabpanel" id={`simple-tabpanel-${index}`} {...other}>
-      {value === index && (
-        <Box sx={{ pt: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ pt: 2 }}>{children}</Box>}
     </div>
   );
 }
@@ -30,7 +27,7 @@ export default function OrdersTab() {
   return (
     <>
       <Box mt={2} sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange} centered>
+        <Tabs value={value} onChange={handleChange} variant="scrollable">
           <Tab
             label={
               <TabTitle title="پرداخت شده" count={2} active={tabId["first"]} />
@@ -58,13 +55,13 @@ export default function OrdersTab() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        item1
+        <OrderCards index={0} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        item2
+        <OrderCards index={1} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        item3
+        <OrderCards index={2} />
       </TabPanel>
     </>
   );

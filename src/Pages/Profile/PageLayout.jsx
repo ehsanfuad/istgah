@@ -17,7 +17,7 @@ function PageLayout() {
   }, [location.pathname, biggerThanMd]);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ px: biggerThanMd ? "2" : "0" }}>
       <Box
         display="flex"
         flexDirection={biggerThanMd ? "row" : "column"}
@@ -30,6 +30,7 @@ function PageLayout() {
           borderRadius={2}
           borderColor={theme.palette.grey[300]}
           display={showMobileMenu ? "block" : "none"}
+          sx={{ height: "fit-content" }}
         >
           <Menu />
         </Box>

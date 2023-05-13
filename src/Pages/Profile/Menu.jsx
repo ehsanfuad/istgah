@@ -36,12 +36,18 @@ const items = [
     path: "/profile/logout",
   },
 ];
-
+function checkExistOrnot(active, itemPath) {
+  if (itemPath === "/profile/orders") {
+    if (active.indexOf(itemPath) >= 0) return true;
+  } else {
+    return active === itemPath ? true : false;
+  }
+}
 function Menu() {
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   const [active, setActive] = useState(items[0].path);
   const location = useLocation();
-  
+
   useEffect(() => {
     setActive(location.pathname);
   }, [location.pathname]);
@@ -68,9 +74,11 @@ function Menu() {
               alignItems="center"
               justifyContent="space-between"
               py={1}
-              px={biggerThanMd ? 2 : 0}
+              px={2}
               marginY={1}
-              borderRight={biggerThanMd && item.path === active ? 5 : 0}
+              borderRight={
+                biggerThanMd && checkExistOrnot(active, item.path) ? 5 : 0
+              }
               borderColor={theme.palette.primary.main}
               onClick={() => {
                 setActive(item.path);
@@ -80,7 +88,11 @@ function Menu() {
                 <Box>{item.icon}</Box>
                 <Typography
                   fontSize="0.8rem"
-                  variant={active === item.path ? "subtitle1" : "subtitle2"}
+                  variant={
+                    active === checkExistOrnot(active, item.path)
+                      ? "subtitle1"
+                      : "subtitle2"
+                  }
                   color={theme.palette.grey[800]}
                 >
                   {item.title}

@@ -55,13 +55,13 @@ export default function OrdersTab() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <OrderCards index={0} />
+        <OrderCards tabId={0} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <OrderCards index={1} />
+        <OrderCards tabId={1} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <OrderCards index={2} />
+        <OrderCards tabId={2} />
       </TabPanel>
     </>
   );

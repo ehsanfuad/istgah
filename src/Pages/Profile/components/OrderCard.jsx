@@ -90,7 +90,13 @@ function OrderCard({ tabId, order }) {
         justifyContent="space-between"
       >
         <CardTitle tabId={tabId} />
-        <BiChevronLeft size={25} color={theme.palette.grey[800]} />
+        <Link
+          to={`/profile/orders/${order.id}`}
+          component={RouterLink}
+          underline="none"
+        >
+          <BiChevronLeft size={25} color={theme.palette.grey[800]} />
+        </Link>
       </Box>
       <Box
         display="flex"

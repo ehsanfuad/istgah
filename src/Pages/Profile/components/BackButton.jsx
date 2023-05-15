@@ -9,7 +9,7 @@ function BackButton({ title }) {
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <Box
-      display={biggerThanMd ? "none" : "flex"}
+      display="flex"
       alignItems="center"
       gap={1}
       onClick={() => navigate("/profile")}

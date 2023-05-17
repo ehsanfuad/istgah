@@ -4,12 +4,17 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsSignpost2 } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { IoLogOutOutline } from "react-icons/io5";
-import { BiChevronLeft } from "react-icons/bi";
+import { BiChevronLeft, BiHomeSmile } from "react-icons/bi";
 import { Box, Typography, Link, Divider, useMediaQuery } from "@mui/material";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { theme } from "../../data/dummy";
 
 const items = [
+  {
+    icon: <BiHomeSmile size={22} />,
+    title: "خلاصه فعالیت ها",
+    path: "/profile",
+  },
   {
     icon: <HiOutlineShoppingBag size={22} />,
     title: "سفارش ها",
@@ -18,7 +23,7 @@ const items = [
   {
     icon: <FiUser size={22} />,
     title: "اطلاعات حساب کاربری",
-    path: "/profile",
+    path: "/profile/personal-info",
   },
   {
     icon: <AiOutlineHeart size={22} />,
@@ -55,7 +60,10 @@ function Menu() {
   return (
     <Box display="flex" flexDirection="column">
       {items.map((item, index) => (
-        <Box key={index}>
+        <Box
+          key={index}
+          display={index === 0 && !biggerThanMd ? "none" : "block"}
+        >
           <Divider
             sx={{
               marginX: 0,

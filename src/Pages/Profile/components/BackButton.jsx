@@ -4,7 +4,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { theme } from "../../../data/dummy";
 import { useNavigate } from "react-router-dom";
 
-function BackButton({ title }) {
+function BackButton({ title, backUrl }) {
   const navigate = useNavigate();
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   return (
@@ -12,7 +12,7 @@ function BackButton({ title }) {
       display="flex"
       alignItems="center"
       gap={1}
-      onClick={() => navigate("/profile")}
+      onClick={() => navigate(backUrl)}
     >
       <BsArrowRight />
       <Typography>{title}</Typography>

@@ -1,9 +1,62 @@
-import { Box, Divider, Typography, styled, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Container,
+  Divider,
+  Typography,
+  styled,
+  useMediaQuery,
+} from "@mui/material";
 import React from "react";
 import BackButton from "./components/BackButton";
 import { theme } from "../../data/dummy";
 import TitleContent from "./components/TitleContent";
-
+import ProductCard from "../../components/Cart/ProductCard";
+import ProductOrderDetails from "./components/ProductOrderDetails";
+const products = [
+  {
+    id: 1,
+    specialSale: true,
+    imgUrl:
+      "https://dkstatics-public.digikala.com/digikala-products/fa5961b7d2a4efb180d686f6f69dd45381a4d3dd_1649056488.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
+    title:
+      "گوشی موبایل اپل مدل iPhone 13 Pro Max A2644 دو سیم‌ کارت ظرفیت 256 گیگابایت و رم 6 گیگابایت",
+    stockNumber: 3,
+    rate: "۴.۳",
+    price: 5000000,
+    discountedPrice: 3304355,
+    discount: 3,
+    category: 6,
+    quantity: 1,
+  },
+  {
+    id: 2,
+    specialSale: false,
+    imgUrl:
+      "https://dkstatics-public.digikala.com/digikala-products/90fc87b40eb1249673b9d0089aca514443a04edf_1619112519.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
+    title: "قاب مدل سیلیکونی مناسب برای گوشی موبایل اپل iphone ۱۲ pro",
+    stockNumber: 10,
+    rate: "۴",
+    price: 1000000,
+    discountedPrice: 55000,
+    discount: null,
+    category: 9,
+    quantity: 1,
+  },
+  {
+    id: 3,
+    specialSale: false,
+    imgUrl:
+      "https://dkstatics-public.digikala.com/digikala-products/90fc87b40eb1249673b9d0089aca514443a04edf_1619112519.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90",
+    title: "قاب صورتی",
+    stockNumber: 10,
+    rate: "۴",
+    price: 4700000,
+    discountedPrice: 350000,
+    discount: null,
+    category: 12,
+    quantity: 1,
+  },
+];
 const StyledBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: useMediaQuery(theme.breakpoints.up("md")) ? "row" : "column",
@@ -16,7 +69,7 @@ function OrderDetails() {
   return (
     <Box display="flex" flexDirection="column">
       <Box p={2}>
-        <BackButton title="جزئیات سفارش" />
+        <BackButton title="جزئیات سفارش" backUrl="/profile/orders" />
       </Box>
       <Divider flexItem />
       {/* پیگیری سفارش تاریخ ثبت */}
@@ -94,6 +147,17 @@ function OrderDetails() {
           </Box>
           {/* progressbar - پیگیری مرسوله */}
           progressbar
+        </Box>
+        <Divider variant="middle" />
+        <Box>
+          {products.map((product, index) => (
+            <Box mt={3} key={index}>
+              <Container maxWidth="xl">
+                <ProductOrderDetails product={product} key={index} border={0} />
+              </Container>
+              <Divider variant="middle" />
+            </Box>
+          ))}
         </Box>
       </Box>
     </Box>

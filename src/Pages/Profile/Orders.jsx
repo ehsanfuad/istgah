@@ -12,7 +12,7 @@ function Orders() {
   return (
     <Box dispaly="flex" flexDirection="column" gap={1}>
       <Box px={2} display={biggerThanMd ? "none" : "block"}>
-        <BackButton title={"تاریخچه سفارشات"} />
+        <BackButton title={"تاریخچه سفارشات"} backUrl="/profile" />
         <Box mt={3} bgcolor={theme.palette.grey[300]} borderRadius={2}>
           <Search />
         </Box>

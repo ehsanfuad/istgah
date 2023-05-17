@@ -16,6 +16,7 @@ import Addresses from "./Pages/Profile/Addresses";
 import WishList from "./Pages/Profile/WishList";
 import PageLayout from "./Pages/Profile/PageLayout";
 import OrderDetails from "./Pages/Profile/OrderDetails";
+import PersonalInfo from "./Pages/Profile/PersonalInfo";
 // import PersonalInfo from "./Pages/Profile/PersonalInfo";
 
 const Layout = () => {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Profile />,
+      },
+      {
+        path: "personal-info",
+        element: <PersonalInfo />,
       },
       {
         path: "orders",

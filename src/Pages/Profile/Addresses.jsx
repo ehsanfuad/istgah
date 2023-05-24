@@ -20,8 +20,10 @@ function Addresses() {
   const [showForm, setShowForm] = useState(false);
   const { latitude, longitude } = useGeolocation();
   const [location, setLocation] = useState(null);
+  console.log(latitude, longitude);
   const handleOpenMap = () => {
     setOpenMap(true);
+    setShowForm(false);
   };
   const handleCloseMap = () => {
     setOpenMap(false);
@@ -75,6 +77,8 @@ function Addresses() {
               longitude={longitude}
               location={location}
               setLocation={setLocation}
+              showForm={showForm}
+              setShowForm={setShowForm}
             />
           </>
         </Modal>
@@ -87,6 +91,8 @@ function Addresses() {
               longitude={longitude}
               location={location}
               setLocation={setLocation}
+              showForm={showForm}
+              setShowForm={setShowForm}
             />
           </>
         </Dialog>

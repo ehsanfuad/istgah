@@ -11,10 +11,19 @@ function AddressDialog({
   longitude,
   location,
   setLocation,
+  showForm,
+  setShowForm,
 }) {
+  // const [showForm, setShowForm] = useState(false);
   return (
     <Box display="flex" flexDirection="column">
-      <Box display="flex" flexDirection="row" alignItems="center" p={2}>
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        px={2}
+        height="10vh"
+      >
         <Box flexGrow={1} display="flex" flexDirection="column" gap={1}>
           <Box width="fit-content">
             <Typography>آدرس جدید</Typography>
@@ -30,20 +39,26 @@ function AddressDialog({
         </Box>
       </Box>
       <Divider variant="fullWidth" />
-      <Box height="70vh" width="100vw" >
-        <MyMap
-          location={location}
-          setLocation={setLocation}
-          latitude={latitude}
-          longitude={longitude}
-        />
+      <Box height={showForm ? "90vh" : "75vh"} width="100vw">
+        {showForm ? (
+          <AddressForm setShowForm={setShowForm} />
+        ) : (
+          <MyMap
+            location={location}
+            setLocation={setLocation}
+            latitude={latitude}
+            longitude={longitude}
+          />
+        )}
       </Box>
       <Box
-        display="flex"
+        display={showForm ? "none" : "flex"}
         flexDirection="row"
         alignItems="center"
         justifyContent="space-between"
-        p={2}
+        mt={1}
+        px={2}
+        height="12vh"
       >
         <Typography fontSize="0.8rem" color={theme.palette.grey[500]}>
           مرسوله های شما به این موقعیت <br />
@@ -53,6 +68,7 @@ function AddressDialog({
           variant="contained"
           size="large"
           disabled={location ? false : true}
+          onClick={() => setShowForm(true)}
         >
           تایید و ادامه
         </Button>

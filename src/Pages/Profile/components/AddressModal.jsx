@@ -4,6 +4,7 @@ import { MdClose } from "react-icons/md";
 import { theme } from "../../../data/dummy";
 import { BiChevronLeft } from "react-icons/bi";
 import MyMap from "../../../components/MyMap/MyMap";
+import AddressForm from "./AddressForm";
 
 function AddressModal({
   handleCloseMap,
@@ -11,6 +12,8 @@ function AddressModal({
   longitude,
   location,
   setLocation,
+  showForm,
+  setShowForm,
 }) {
   const style = {
     display: "flex",
@@ -31,7 +34,7 @@ function AddressModal({
   };
   return (
     <Box sx={style}>
-      <Box display="flex" flexDirection="row" alignItems="center">
+      <Box display="flex" flexDirection="row" alignItems="center" height="10vh">
         <Box flexGrow={1} display="flex" flexDirection="column" gap={1}>
           <Box width="fit-content">
             <Typography>آدرس جدید</Typography>
@@ -48,16 +51,29 @@ function AddressModal({
       </Box>
       <Divider variant="fullWidth" />
       {/* map container */}
-      <Box height="70%">
+      <Box height={showForm ? "90vh" : "75vh"} width="100%">
+        {showForm ? (
+          <AddressForm setShowForm={setShowForm} />
+        ) : (
+          <MyMap
+            location={location}
+            setLocation={setLocation}
+            latitude={latitude}
+            longitude={longitude}
+          />
+        )}
+      </Box>
+      {/* <Box height="70%">
         <MyMap
           location={location}
           setLocation={setLocation}
           latitude={latitude}
           longitude={longitude}
         />
-      </Box>
+      </Box> */}
       <Box
-        display="flex"
+        display={showForm ? "none" : "flex"}
+        // display="flex"  
         flexDirection="row"
         alignItems="center"
         justifyContent="space-between"
@@ -74,6 +90,7 @@ function AddressModal({
           }
           size="large"
           disabled={location ? false : true}
+          onClick={() => setShowForm(true)}
         >
           تایید و ادامه
         </Button>

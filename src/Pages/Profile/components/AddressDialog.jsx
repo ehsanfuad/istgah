@@ -4,6 +4,8 @@ import { MdClose } from "react-icons/md";
 import { theme } from "../../../data/dummy";
 import MyMap from "../../../components/MyMap/MyMap";
 import AddressForm from "./AddressForm";
+import AddressHeader from "./AddressHeader";
+import AddressFooter from "./AddressFooter";
 
 function AddressDialog({
   handleCloseMap,
@@ -14,29 +16,10 @@ function AddressDialog({
   showForm,
   setShowForm,
 }) {
-  // const [showForm, setShowForm] = useState(false);
   return (
     <Box display="flex" flexDirection="column">
-      <Box
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        px={2}
-        height="10vh"
-      >
-        <Box flexGrow={1} display="flex" flexDirection="column" gap={1}>
-          <Box width="fit-content">
-            <Typography>آدرس جدید</Typography>
-          </Box>
-          <Box width="fit-content">
-            <Typography fontSize="0.8rem" color={theme.palette.grey[500]}>
-              موقعیت مکانی آدرس را مشخص کنید
-            </Typography>
-          </Box>
-        </Box>
-        <Box>
-          <MdClose size={22} onClick={() => handleCloseMap()} />
-        </Box>
+      <Box px={2}>
+        <AddressHeader handleCloseMap={handleCloseMap} />
       </Box>
       <Divider variant="fullWidth" />
       <Box height={showForm ? "90vh" : "75vh"} width="100vw">
@@ -51,27 +34,13 @@ function AddressDialog({
           />
         )}
       </Box>
-      <Box
-        display={showForm ? "none" : "flex"}
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="space-between"
-        mt={1}
-        px={2}
-        height="12vh"
-      >
-        <Typography fontSize="0.8rem" color={theme.palette.grey[500]}>
-          مرسوله های شما به این موقعیت <br />
-          ارسال خواهد شد
-        </Typography>
-        <Button
-          variant="contained"
-          size="large"
-          disabled={location ? false : true}
-          onClick={() => setShowForm(true)}
-        >
-          تایید و ادامه
-        </Button>
+
+      <Box mt={1}>
+        <AddressFooter
+          setShowForm={setShowForm}
+          location={location}
+          showForm={showForm}
+        />
       </Box>
     </Box>
   );

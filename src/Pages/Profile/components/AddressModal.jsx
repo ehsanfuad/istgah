@@ -5,6 +5,8 @@ import { theme } from "../../../data/dummy";
 import { BiChevronLeft } from "react-icons/bi";
 import MyMap from "../../../components/MyMap/MyMap";
 import AddressForm from "./AddressForm";
+import AddressHeader from "./AddressHeader";
+import AddressFooter from "./AddressFooter";
 
 function AddressModal({
   handleCloseMap,
@@ -34,24 +36,10 @@ function AddressModal({
   };
   return (
     <Box sx={style}>
-      <Box display="flex" flexDirection="row" alignItems="center" height="10vh">
-        <Box flexGrow={1} display="flex" flexDirection="column" gap={1}>
-          <Box width="fit-content">
-            <Typography>آدرس جدید</Typography>
-          </Box>
-          <Box width="fit-content">
-            <Typography fontSize="0.8rem" color={theme.palette.grey[500]}>
-              موقعیت مکانی آدرس را مشخص کنید
-            </Typography>
-          </Box>
-        </Box>
-        <Box sx={{ cursor: "pointer" }}>
-          <MdClose size={22} onClick={() => handleCloseMap()} />
-        </Box>
-      </Box>
+      <AddressHeader handleCloseMap={handleCloseMap} />
       <Divider variant="fullWidth" />
       {/* map container */}
-      <Box height={showForm ? "90vh" : "75vh"} width="100%">
+      <Box height={showForm ? "88vh" : "75vh"} width="100%">
         {showForm ? (
           <AddressForm setShowForm={setShowForm} />
         ) : (
@@ -63,17 +51,8 @@ function AddressModal({
           />
         )}
       </Box>
-      {/* <Box height="70%">
-        <MyMap
-          location={location}
-          setLocation={setLocation}
-          latitude={latitude}
-          longitude={longitude}
-        />
-      </Box> */}
-      <Box
+      {/* <Box
         display={showForm ? "none" : "flex"}
-        // display="flex"  
         flexDirection="row"
         alignItems="center"
         justifyContent="space-between"
@@ -94,7 +73,12 @@ function AddressModal({
         >
           تایید و ادامه
         </Button>
-      </Box>
+      </Box> */}
+      <AddressFooter
+        setShowForm={setShowForm}
+        location={location}
+        showForm={showForm}
+      />
     </Box>
   );
 }

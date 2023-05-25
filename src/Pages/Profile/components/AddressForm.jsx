@@ -1,16 +1,52 @@
-import { Box, Divider, Grid, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Grid,
+  Paper,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React from "react";
 import BackButton from "./BackButton";
 import { Formik, Form } from "formik";
 import { theme } from "../../../data/dummy";
 import { Link } from "react-router-dom";
 import { BiChevronLeft } from "react-icons/bi";
-
+import TextField from "@mui/material/TextField";
+import useClasses from "../../../utils/useClasses";
 function AddressForm({ setShowForm }) {
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
+  const styles = (theme) => ({
+    gridContainer: {
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
+    },
+    column1: {
+      flex: "0 0 auto",
+      backgroundColor: "lightblue",
+      padding: theme.spacing(2),
+    },
+    column2: {
+      flex: "1 1 auto",
+      backgroundColor: "lightgreen",
+      padding: theme.spacing(2),
+    },
+    column3: {
+      flex: "0 0 auto",
+      backgroundColor: "lightblue",
+      padding: theme.spacing(2),
+    },
+  });
+  const classes = useClasses(styles);
   return (
     <>
-      <Box
+      <div className={classes.gridContainer}>
+        <Paper className={classes.column1}>Column 1</Paper>
+        <Paper className={classes.column2}>Column 2</Paper>
+        <Paper className={classes.column3}>Column 3</Paper>
+      </div>
+      {/* <Box
         display="flex"
         flexDirection="column"
         width="100%"
@@ -80,10 +116,10 @@ function AddressForm({ setShowForm }) {
         </Formik>
       </Box>
       <Box bgcolor="black">button</Box> */}
-      </Box>
+      {/* </Box>
       <Box bgcolor="black" height="20%">
         button
-      </Box>
+      </Box> */}
     </>
   );
 }

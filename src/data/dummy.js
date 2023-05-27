@@ -78,7 +78,7 @@ export function searchPageData(slug) {
 }
 export function getCategoryBySlug(slug) {
   let category = {};
-  let fintCats = navLinks.filter(cat => cat.slug === slug);
+  let fintCats = navLinks.filter((cat) => cat.slug === slug);
   let cat = fintCats[0];
   category = {
     name: cat.name,
@@ -95,9 +95,9 @@ export function createCategoryList(categories, parentId = null) {
   let cats;
   let category = {};
   if (parentId === null) {
-    cats = categories.filter(cat => cat.parentId === null);
+    cats = categories.filter((cat) => cat.parentId === null);
   } else {
-    cats = categories.filter(cat => cat.parentId === parentId);
+    cats = categories.filter((cat) => cat.parentId === parentId);
   }
   for (let cat of cats) {
     category = {
@@ -159,7 +159,7 @@ function makeBreadcrumbs(categories, parentId) {
 }
 function findParent(categories, parentId) {
   let founded = {};
-  categories.map(category => {
+  categories.map((category) => {
     if (category.id === parentId) {
       founded = category;
     }
@@ -354,9 +354,9 @@ export const allProducts = [
   },
 ];
 
-export const getProductById = productId => {
+export const getProductById = (productId) => {
   const product = allProducts.find(
-    product => product.id === parseInt(productId)
+    (product) => product.id === parseInt(productId)
   );
   return product;
 };

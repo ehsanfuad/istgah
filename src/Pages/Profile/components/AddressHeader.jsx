@@ -5,7 +5,7 @@ import { theme } from "../../../data/dummy";
 
 function AddressHeader({ handleCloseMap }) {
   return (
-    <Box display="flex" flexDirection="row" alignItems="center" height="10vh">
+    <Box display="flex" flexDirection="row" alignItems="center">
       <Box flexGrow={1} display="flex" flexDirection="column" gap={1}>
         <Box width="fit-content">
           <Typography>آدرس جدید</Typography>

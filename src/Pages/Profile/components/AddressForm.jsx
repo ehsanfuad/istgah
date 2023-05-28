@@ -207,7 +207,7 @@ function AddressForm({ setShowForm, location }) {
               address: "",
               state: null,
               city: null,
-              pelak: "",
+              unit: "",
               vahed: "",
               postalCode: "",
             }}
@@ -304,18 +304,60 @@ function AddressForm({ setShowForm, location }) {
                       </Box>
                     </Grid>
                     <Grid item xs={6} md={3}>
-                      <Box height="150px" bgcolor="greenyellow">
-                        پلاک
+                      <Box p={2} sx={{ direction: "rtl" }}>
+                        <Field name="unit">
+                          {({ field }) => (
+                            <TextField
+                              {...field}
+                              color="primary"
+                              id="unit"
+                              label="پلاک"
+                              multiline
+                              maxRows={2}
+                              padding="1rem"
+                              fullWidth
+                              dir="rtl"
+                            />
+                          )}
+                        </Field>
                       </Box>
                     </Grid>
                     <Grid item xs={6} md={3}>
-                      <Box height="150px" bgcolor="pink">
-                        واحد
+                      <Box p={2} sx={{ direction: "rtl" }}>
+                        <Field name="vahed">
+                          {({ field }) => (
+                            <TextField
+                              {...field}
+                              color="primary"
+                              id="vahed"
+                              label="واحد"
+                              multiline
+                              maxRows={2}
+                              padding="1rem"
+                              fullWidth
+                              dir="rtl"
+                            />
+                          )}
+                        </Field>
                       </Box>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <Box height="150px" bgcolor="tomato">
-                        کدپستی
+                      <Box p={2} sx={{ direction: "rtl" }}>
+                        <Field name="postalcode">
+                          {({ field }) => (
+                            <TextField
+                              {...field}
+                              color="primary"
+                              id="postalcode"
+                              label="کدپستی"
+                              multiline
+                              maxRows={2}
+                              padding="1rem"
+                              fullWidth
+                              dir="rtl"
+                            />
+                          )}
+                        </Field>
                       </Box>
                     </Grid>
                   </Grid>
@@ -327,7 +369,7 @@ function AddressForm({ setShowForm, location }) {
                     justifyContent="center"
                     alignItems="center"
                     bottom="0"
-                    bgcolor="plum"
+                    // bgcolor="plum"
                   >
                     <Button
                       variant="contained"

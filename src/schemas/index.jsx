@@ -15,3 +15,9 @@ export const verifySchema = yup.object().shape({
     .required("")
     .matches(/^[0-9]+$/, "مقدار وارد شده باید فقط شامل عدد باشد."),
 });
+
+const commonErrorAddress = "اینجا را خالی نگذارید";
+export const addressSchema = yup.object().shape({
+  address: yup.string().required(commonErrorAddress),
+  state: yup.string(),
+});

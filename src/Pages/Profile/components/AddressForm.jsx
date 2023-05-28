@@ -20,11 +20,13 @@ import { CacheProvider } from "@emotion/react";
 import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 import createCache from "@emotion/cache";
-function AddressForm({ setShowForm, location }) {
+import { addressSchema } from "../../../schemas";
+function AddressForm({ setShowForm, location, handleCloseMap }) {
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   const onSubmit = (values, errors) => {
     console.log("submitted");
     console.log(values);
+    handleCloseMap();
   };
   const cacheRtl = createCache({
     key: "muirtl",
@@ -172,6 +174,122 @@ function AddressForm({ setShowForm, location }) {
       id: 2,
       cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
     },
+    {
+      id: 3,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 4,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 5,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 6,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 7,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 8,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 9,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 10,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 11,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 12,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 13,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 14,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 15,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 16,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 17,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 18,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 19,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 20,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 21,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 22,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 23,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 24,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 25,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 26,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 27,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 28,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 29,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 30,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
+    {
+      id: 31,
+      cities: [{ label: "شهر ۱" }, { label: "شهر ۲" }],
+    },
   ];
   const findCities = (stateId) => {
     return allCities.find((item, index) => item.id === stateId).cities;
@@ -204,6 +322,7 @@ function AddressForm({ setShowForm, location }) {
         <Box height="70vh" sx={{ overflowY: "scroll" }}>
           <Formik
             initialValues={{
+              location,
               address: "",
               state: null,
               city: null,
@@ -211,7 +330,7 @@ function AddressForm({ setShowForm, location }) {
               vahed: "",
               postalCode: "",
             }}
-            // validationSchema={loginSchema}
+            validationSchema={addressSchema}
             onSubmit={onSubmit}
           >
             {({ errors, touched, setFieldValue, values }) => (
@@ -231,6 +350,8 @@ function AddressForm({ setShowForm, location }) {
                             padding="1rem"
                             fullWidth
                             dir="rtl"
+                            error={touched.address && Boolean(errors.address)}
+                            helperText={touched.address && errors.address}
                           />
                         )}
                       </Field>
@@ -259,18 +380,21 @@ function AddressForm({ setShowForm, location }) {
                               {...field}
                               disablePortal
                               value={values.state}
+                              isOptionEqualToValue={(option, value) =>
+                                option.value === value.value
+                              }
                               onChange={(event, newValue) => {
-                                setFieldValue("state", newValue);
-                                // console.log("new valye:", newValue.id);
+                                setFieldValue("state", newValue.label);
                                 setCities(findCities(newValue.id));
                               }}
                               options={allStates}
-                              getOptionLabel={(option) => option.label}
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
                                   label="استان"
                                   variant="outlined"
+                                  error={touched.state && Boolean(errors.state)}
+                                  helperText={touched.state && errors.state}
                                 />
                               )}
                             />
@@ -286,16 +410,20 @@ function AddressForm({ setShowForm, location }) {
                               {...field}
                               disablePortal
                               value={values.city}
+                              isOptionEqualToValue={(option, value) =>
+                                option.value === value.value
+                              }
                               onChange={(event, newValue) => {
-                                setFieldValue("city", newValue);
+                                setFieldValue("city", newValue.label);
                               }}
                               options={cities}
-                              getOptionLabel={(option) => option.label}
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
                                   label="شهر"
                                   variant="outlined"
+                                  error={touched.city && Boolean(errors.city)}
+                                  helperText={touched.city && errors.city}
                                 />
                               )}
                             />
@@ -317,6 +445,8 @@ function AddressForm({ setShowForm, location }) {
                               padding="1rem"
                               fullWidth
                               dir="rtl"
+                              error={touched.unit && Boolean(errors.unit)}
+                              helperText={touched.unit && errors.unit}
                             />
                           )}
                         </Field>
@@ -336,6 +466,8 @@ function AddressForm({ setShowForm, location }) {
                               padding="1rem"
                               fullWidth
                               dir="rtl"
+                              // error={Boolean(errors.vahed)}
+                              // helperText={errors.vahed}
                             />
                           )}
                         </Field>
@@ -343,18 +475,24 @@ function AddressForm({ setShowForm, location }) {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Box p={2} sx={{ direction: "rtl" }}>
-                        <Field name="postalcode">
+                        <Field name="postalCode">
                           {({ field }) => (
                             <TextField
                               {...field}
                               color="primary"
-                              id="postalcode"
+                              id="postalCode"
                               label="کدپستی"
                               multiline
                               maxRows={2}
                               padding="1rem"
                               fullWidth
                               dir="rtl"
+                              error={
+                                touched.postalCode && Boolean(errors.postalCode)
+                              }
+                              helperText={
+                                touched.postalCode && errors.postalCode
+                              }
                             />
                           )}
                         </Field>

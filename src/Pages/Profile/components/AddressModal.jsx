@@ -42,7 +42,7 @@ function AddressModal({
       <Divider variant="fullWidth" />
       <Box height="55vh" width="100%">
         {showForm ? (
-          <AddressForm setShowForm={setShowForm} location={location} />
+          <AddressForm setShowForm={setShowForm} location={location} handleCloseMap={handleCloseMap} />
         ) : (
           <MyMap
             location={location}

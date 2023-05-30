@@ -14,6 +14,7 @@ import { theme } from "../../data/dummy";
 import AddressDialog from "./components/AddressDialog";
 import BackButton from "./components/BackButton";
 import AddressForm from "./components/AddressForm";
+import AddressCard from "./components/AddressCard";
 function Addresses() {
   const biggerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   const [openMap, setOpenMap] = useState(false);
@@ -97,6 +98,11 @@ function Addresses() {
           </>
         </Dialog>
       )}
+      {/* azinja */}
+      <Box display="flex" flexDirection="column">
+        <AddressCard />
+      </Box>
+      {/* ta inja */}
     </Box>
   );
 }

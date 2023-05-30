@@ -20,7 +20,7 @@ function Addresses() {
   const [showForm, setShowForm] = useState(false);
   const { latitude, longitude } = useGeolocation();
   const [location, setLocation] = useState(null);
-  console.log(latitude, longitude);
+
   const handleOpenMap = () => {
     setOpenMap(true);
     setShowForm(false);
